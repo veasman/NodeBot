@@ -2,15 +2,16 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 
 const config = require("../config.json");
+const firstMessage = require("../first-message");
 const command = require("./command");
+const privateMessage = require("./private-message");
 
 client.on("ready", () => {
   console.log("Client is ready");
 
-  command(client, "ping", (message) => {
-    message.channel.send("pong");
-  });
-  command(client, "servers", (message) => {
+  //firstMessage(client, "821207245676085298", "hello world", ["😳"]);
+  privateMessage(client, "ping", "pong");
+  /*command(client, "servers", (message) => {
     client.guilds.cache.forEach((guild) => {
       message.channel.send(
         `${guild.name} has a total of ${guild.memberCount} members`
@@ -23,16 +24,7 @@ client.on("ready", () => {
         message.channel.bulkDelete(results);
       });
     }
-  });
-  command(client, "status", (message) => {
-    const content = message.content.replace("!status ", "");
-    client.user.setPresence({
-      activity: {
-        name: content,
-        type: 0,
-      },
-    });
-  });
+  });*/
 });
 
 client.login(config.token);
