@@ -1,3 +1,5 @@
+const sendMessage = require("./send-message");
+
 module.exports = (client, callback) => {
   client.on("message", (message) => {
     if (message.author === "821479799540940840") {
@@ -7,7 +9,7 @@ module.exports = (client, callback) => {
 
     if (content.toLowerCase().includes("nigger")) {
       message.delete();
-      message.channel.send(`${message.author} dont say that!`);
+      sendMessage(message.channel, `${message.author} dont say that!`, 5);
     }
   });
 };
