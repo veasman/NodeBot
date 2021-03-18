@@ -13,6 +13,7 @@ module.exports = {
 
     if (!member) {
       message.channel.send(`${tag} is not a valid user`)
+      return;
     }
 
     if (!member.kickable) {

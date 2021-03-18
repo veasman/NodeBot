@@ -5,6 +5,7 @@ const welcome = require("./welcome");
 //const roleClaim = require("./role-claim");
 const antiAd = require("./anti-ad");
 const censorship = require("./censorship");
+const inviteNotifications = require("./invite-notifications");
 
 const mongo = require("./mongo");
 const config = require("../config.json");
@@ -21,6 +22,7 @@ client.on("ready", async () => {
   //roleClaim(client);
   welcome(client);
   censorship(client);
+  inviteNotifications(client);
 });
 
 client.login(config.token);
