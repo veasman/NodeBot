@@ -6,6 +6,7 @@ const welcome = require("./welcome");
 const antiAd = require("./anti-ad");
 const censorship = require("./censorship");
 const inviteNotifications = require("./invite-notifications");
+const scalingChannels = require("./scaling-channels");
 
 const mongo = require("./mongo");
 const config = require("../config.json");
@@ -23,6 +24,7 @@ client.on("ready", async () => {
   welcome(client);
   censorship(client);
   inviteNotifications(client);
+  scalingChannels(client);
 });
 
 client.login(config.token);
