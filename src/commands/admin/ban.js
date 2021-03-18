@@ -1,5 +1,5 @@
 module.exports = {
-  commands: "kick",
+  commands: "ban",
   expectedArgs: "<user>",
   permissionError: "Admin perms are required to run this command",
   minArgs: 1,
@@ -15,12 +15,12 @@ module.exports = {
     }
 
     if (!member.kickable) {
-      message.channel.send(`${tag} can not be kicked`)
+      message.channel.send(`${tag} can not be banned`)
       return;
     }
 
-    member.kick();
-    message.channel.send(`${tag} was kicked from the server`)
+    member.ban();
+    message.channel.send(`${tag} was banned from the server`)
   },
   permissions: ["ADMINISTRATOR"],
   requiredRoles: [],

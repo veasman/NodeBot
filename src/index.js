@@ -6,18 +6,22 @@ const client = new Discord.Client();
 const command = require("./command-handler");
 const welcome = require("./welcome");
 //const roleClaim = require("./role-claim");
+const antiAd = require("./anti-ad")
 const censorship = require("./censorship");
-//const sendMessage = require("./send-message");
-//const firstMessage = require("./first-message");
-//const privateMessage = require("./private-message");
 
+const mongo = require("./mongo")
 const config = require("../config.json");
 
-client.on("ready", () => {
+client.on("ready", async () => {
   console.log("Client is ready");
 
-  const baseFile = "command-base.js"
-  const commandBase = require(`./commands/${baseFile}`)
+  antiAd(client)
+  //roleClaim(client);
+  welcome(client);
+  censorship(client);
+
+  const baseFile = "command-base.js";
+  const commandBase = require(`./commands/${baseFile}`);
 
   const readCommands = (dir) => {
     const files = fs.readdirSync(path.join(__dirname, dir))
@@ -73,10 +77,6 @@ client.on("ready", () => {
       });
     }
   });
-
-  //roleClaim(client);
-  welcome(client);
-  censorship(client);
 });
 
 client.login(config.token);
