@@ -4,6 +4,7 @@ module.exports = {
   permissionError: "Admin perms are required to run this command",
   minArgs: 1,
   maxArgs: 1,
+  description: "Ban a user from the server",
   callback: (message, arguments, text) => {
     const { mentions } = message;
 

@@ -1,16 +1,15 @@
-const path = require("path")
-const fs = require("fs")
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
 const command = require("./command-handler");
 const welcome = require("./welcome");
 //const roleClaim = require("./role-claim");
-const antiAd = require("./anti-ad")
+const antiAd = require("./anti-ad");
 const censorship = require("./censorship");
 
-const mongo = require("./mongo")
+const mongo = require("./mongo");
 const config = require("../config.json");
+const loadCommands = require("./commands/load-commands");
 
 client.on("ready", async () => {
   console.log("Client is ready");
@@ -20,63 +19,7 @@ client.on("ready", async () => {
   welcome(client);
   censorship(client);
 
-  const baseFile = "command-base.js";
-  const commandBase = require(`./commands/${baseFile}`);
-
-  const readCommands = (dir) => {
-    const files = fs.readdirSync(path.join(__dirname, dir))
-    for (const file of files) {
-      const stat = fs.lstatSync(path.join(__dirname, dir, file))
-      if (stat.isDirectory()) {
-        readCommands(path.join(dir, file))
-      } else if (file !== baseFile) {
-        const option = require(path.join(__dirname, dir, file))
-        commandBase(client, option)
-      }
-    }
-  }
-
-  readCommands("commands")
-
-  command(client, "serverinfo", (message) => {
-    const { guild } = message;
-
-    const { name, region, memberCount, owner, createdAt } = guild;
-
-    const icon = guild.iconURL();
-
-    const embed = new Discord.MessageEmbed()
-      .setTitle(`Server info for ${name}`)
-      .setThumbnail(icon)
-      .setColor(0xfa5ffa)
-      .addFields(
-        {
-          name: "Region",
-          value: region,
-          inline: true,
-        },
-        {
-          name: "Members",
-          value: memberCount,
-          inline: true,
-        },
-        {
-          name: "Created On",
-          value: createdAt,
-        }
-      );
-
-    message.channel.send(embed);
-  });
-
-  // Purge messages
-  command(client, ["purge", "clear"], (message) => {
-    if (message.member.hasPermission("ADMINISTRATOR")) {
-      message.channel.messages.fetch().then((results) => {
-        message.channel.bulkDelete(results);
-      });
-    }
-  });
+  loadCommands(client);
 });
 
 client.login(config.token);
