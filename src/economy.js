@@ -64,7 +64,7 @@ module.exports.getCoins = async (guildId, userId) => {
         }).save();
       }
 
-      coinsCache[`${guildId}-${uesrId}`] = coins;
+      coinsCache[`${guildId}-${userId}`] = coins;
 
       return coins;
     } finally {

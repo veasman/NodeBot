@@ -9,7 +9,7 @@ module.exports = {
   callback: async (message, arguments) => {
     const mention = message.mentions.users.first();
 
-    if (!mentions) {
+    if (!mention) {
       message.reply("Please tag a user to give coins to");
       return;
     }
@@ -25,7 +25,7 @@ module.exports = {
 
     const newCoins = await economy.addCoins(guildId, userId, coins);
 
-    message.reply(`You have give <@${user.id}> ${coins} coin(s). They now have ${newCoins} coin(s)`)
+    message.reply(`You have give <@${userId}> ${coins} coin(s). They now have ${newCoins} coin(s)`)
   },
-  requiredRoles: "𝖒𝖊𝖗𝖈𝖍𝖆𝖓𝖙"
+  requiredRoles: ["𝖒𝖊𝖗𝖈𝖍𝖆𝖓𝖙"]
 }
