@@ -1,74 +1,69 @@
-const mongo = require("./mongo");
-const profileSchema = require("./schemas/profile-schema");
+const mongo = require("./mongo")
+const profileSchema = require("./schemas/profile-schema")
 
-const coinsCache = {};
+const coinsCache = {}
 
-module.exports = (client) => {};
+module.exports = (client) => {}
 
-module.exports.addCoins = async( guildId, userId, coins) => {
-  const cachedValue = coinsCache[`${guildId}-${userId}`];
-  if (cachedValue) {
-    return cachedValue;
-  }
-
+module.exports.addCoins = async (guildId, userId, coins) => {
   return await mongo().then(async (mongoose) => {
-    try{
-      console.log("Running findOneAndUpdate()");
-
-      const result = await profileSchema.findOneAndUpdate({
-        guildId,
-        userId
-      }, {
-        guildId,
-        userId,
-        $inc: {
-          coins
+    try {
+      const result = await profileSchema.findOneAndUpdate(
+        {
+          guildId,
+          userId,
+        },
+        {
+          guildId,
+          userId,
+          $inc: {
+            coins,
+          },
+        },
+        {
+          upsert: true,
+          new: true,
         }
-      }, {
-        upsert: true,
-        new: true
-      })
+      )
 
-      console.log("RESULT:", result);
+      coinsCache[`${guildId}-${userId}`] = result.coins
 
-      coinsCache[`${guildId}-${userId}`] = result.coins;
-
-      return result.coins;
+      return result.coins
     } finally {
-      mongoose.connection.close();
+      mongoose.connection.close()
     }
   })
 }
 
 module.exports.getCoins = async (guildId, userId) => {
+  const cachedValue = coinsCache[`${guildId}-${userId}`]
+  if (cachedValue) {
+    return cachedValue
+  }
+
   return await mongo().then(async (mongoose) => {
     try {
-      console.log("Running findOne()");
-
       const result = await profileSchema.findOne({
         guildId,
-        userId
-      });
+        userId,
+      })
 
-      console.log("RESULT:", result);
-
-      let coins = 0;
+      let coins = 0
       if (result) {
-        coins = result.coins;
+        coins = result.coins
       } else {
-        console.log("Inserting a document");
         await new profileSchema({
           guildId,
           userId,
-          coins
-        }).save();
+          coins,
+        }).save()
       }
 
-      coinsCache[`${guildId}-${userId}`] = coins;
+      coinsCache[`${guildId}-${userId}`] = coins
 
-      return coins;
+      return coins
     } finally {
-      mongoose.connection.close();
+      mongoose.connection.close()
     }
   })
 }

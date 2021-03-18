@@ -1,8 +1,8 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 
 const reqString = {
   type: String,
-  required: true
+  required: true,
 }
 
 const profileSchema = mongoose.Schema({
@@ -10,8 +10,8 @@ const profileSchema = mongoose.Schema({
   userId: reqString,
   coins: {
     type: Number,
-    required: true
+    required: true,
   },
-});
+})
 
-module.exports = mongoose.model("profiles", profileSchema);
+module.exports = mongoose.model("profiles", profileSchema)

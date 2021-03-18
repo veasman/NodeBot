@@ -1,7 +1,7 @@
 const economy = require("../../economy")
 
 module.exports = {
-  commands: ["addbalance", "addbal"],
+  commands: ["removebalance", "removebal"],
   minArgs: 2,
   minArgs: 2,
   expectedArgs: "[target] [coins]",
@@ -23,9 +23,9 @@ module.exports = {
     const guildId = message.guild.id;
     const userId = mention.id;
 
-    const newCoins = await economy.addCoins(guildId, userId, coins, true);
+    const newCoins = await economy.addCoins(guildId, userId, -coins);
 
-    message.reply(`You have given <@${userId}> ${coins} coin(s). They now have ${newCoins} coin(s)`)
+  message.reply(`You have removed ${coins} coin(s) from <@${userId}>. They now have ${newCoins} coin(s)`)
   },
   permissions: ["ADMINISTRATOR"]
   //requiredRoles: ["𝖒𝖊𝖗𝖈𝖍𝖆𝖓𝖙"]

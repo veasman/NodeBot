@@ -7,13 +7,11 @@ module.exports = {
   commands: ["help", "h"],
   description: "Describes all of this bot's commands",
   callback: (message, arguments, text) => {
-    let reply = "I am the tutorial bot, here are my supported commands:\n\n"
-
     const commands = loadCommands()
 
     const embed = new Discord.MessageEmbed()
-      .setTitle("YSL Bot Commands")
-      .setColor(0xfa5ffa)
+    .setTitle("YSL Bot Commands")
+    .setColor(0xfa5ffa);
 
     for (const command of commands) {
       // Check for permissions
@@ -21,6 +19,7 @@ module.exports = {
 
       // Times we have looped
       let loopNum = 0;
+
 
       if (permissions) {
         let hasPermission = true
@@ -48,19 +47,17 @@ module.exports = {
       const args = command.expectedArgs ? ` ${command.expectedArgs}` : ""
       const { description } = command
 
-      //reply += `**${prefix}${mainCommand}${args}** = ${description}\n`
-
       var isInline = loopNum % 2 === 0;
 
       embed.addFields(
           {
             name: `${prefix}${mainCommand} ${args}`,
-            value: "`"+description+"`", // This is the best way to do this as far as I know
+            value: "`"+description+"`", // This is the best way to do this AFAIK
             inline: isInline,
           }
         );
 
-      loopNum += 1
+      loopNum += 1;
     }
 
     message.channel.send(embed);

@@ -11,6 +11,6 @@ module.exports = {
 
     message.reply(`The sum is ${num1 + num2}`)
   },
-  permissions: ["ADMINISTRATOR"],
+  permissions: [],
   requiredRoles: [],
 };
