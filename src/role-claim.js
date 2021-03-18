@@ -1,4 +1,4 @@
-const firstMessage = require("./first-message");
+/*const firstMessage = require("./first-message");
 
 module.exports = (client) => {
   const channelId = "821481273075433532";
@@ -7,7 +7,7 @@ module.exports = (client) => {
     client.emojis.cache.find((emoji) => emoji.name === emojiName);
 
   const emojis = {
-    member: "member",
+    member: "white_check_mark",
   };
 
   const reactions = [];
@@ -28,7 +28,7 @@ module.exports = (client) => {
 
     const { guild } = reaction.message;
 
-    const roleName = emojis[emoji];
+    const roleName = "𝖒𝖊𝖒𝖇𝖊𝖗";
     if (!roleName) {
       return;
     }
@@ -55,3 +55,4 @@ module.exports = (client) => {
     }
   });
 };
+*/
