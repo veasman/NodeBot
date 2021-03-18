@@ -1,10 +1,10 @@
 module.exports = {
   commands: "kick",
-  expectedArgs: "<user>",
+  expectedArgs: "[user]",
   permissionError: "Admin perms are required to run this command",
   minArgs: 1,
   maxArgs: 1,
-  description: "Kick a user from the server",
+  description: "Kick a user",
   callback: (message, arguments, text) => {
     const { mentions } = message;
 

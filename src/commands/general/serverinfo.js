@@ -1,20 +1,22 @@
+const Discord = require("discord.js");
+
 module.exports = {
   commands: "serverinfo",
   expectedArgs: "",
   permissionError: "",
   minArgs: 0,
   maxArgs: 0,
-  desription: "View the server's information",
+  description: "View the server's information",
   callback: (message, arguments, text) => {
     const { guild } = message;
 
     const { name, region, memberCount, owner, createdAt } = guild;
 
-    const icon = guild.iconURL();
+    const serverIcon = guild.iconURL();
 
     const embed = new Discord.MessageEmbed()
-      .setTitle(`Server info for ${name}`)
-      .setThumbnail(icon)
+      .setTitle(`${name}`)
+      .setThumbnail(serverIcon)
       .setColor(0xfa5ffa)
       .addFields(
         {

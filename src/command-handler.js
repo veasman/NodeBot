@@ -1,3 +1,5 @@
+// TODO: This is old, and I need to stop using it
+
 const { prefix } = require("../config.json");
 module.exports = (client, aliases, callback) => {
   if (typeof aliases === "string") {
