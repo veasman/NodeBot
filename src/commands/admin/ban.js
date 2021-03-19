@@ -12,17 +12,17 @@ module.exports = {
     const member = mentions.members.first();
 
     if (!member) {
-      message.channel.send(`${tag} is not a valid user`)
+      message.channel.send(`${tag} is not a valid user`);
       return;
     }
 
     if (!member.kickable) {
-      message.channel.send(`${tag} can not be banned`)
+      message.channel.send(`${tag} can not be banned`);
       return;
     }
 
     member.ban();
-    message.channel.send(`${tag} was banned from the server`)
+    message.channel.send(`${tag} was banned from the server`);
   },
   permissions: ["ADMINISTRATOR"],
   requiredRoles: [],

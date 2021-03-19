@@ -1,4 +1,4 @@
-const economy = require("../../economy")
+const economy = require("../../economy");
 
 module.exports = {
   commands: "pay",
@@ -6,35 +6,36 @@ module.exports = {
   maxArgs: 2,
   expectedArgs: "[user] [ammount]",
   callback: async (message, arguments, text) => {
-    const { guild, member } = message
+    const { guild, member } = message;
 
-    const target = message.mentions.users.first()
+    const target = message.mentions.users.first();
     if (!target) {
-      message.reply("Please specify someone to give coins to")
-      return
+      message.reply("Please specify someone to give coins to");
+      return;
     }
 
-    const coinsToGive = arguments[1]
+    const coinsToGive = arguments[1];
     if (isNaN(coinsToGive) || coinsToGive < 1) {
-      message.reply("Please provide a valid number of coins to give")
-      return
+      message.reply("Please provide a valid number of coins to give");
+      return;
     }
 
-    const coinsOwned = await economy.getCoins(guild.id, member.id)
+    const coinsOwned = await economy.getCoins(guild.id, member.id);
     if (coinsOwned < coinsToGive) {
-      message.reply(`You do not have ${coinsToGive} coins`)
-      return
+      message.reply(`You do not have ${coinsToGive} coins`);
+      return;
     }
 
     const remainingCoins = await economy.addCoins(
       guild.id,
       member.id,
       coinsToGive * -1
-    )
-    const newBalance = await economy.addCoins(guild.id, target.id, coinsToGive)
+    );
+    const newBalance = await economy.addCoins(guild.id, target.id, coinsToGive);
 
     message.reply(
       `You have given <@${target.id}> ${coinsToGive} coins. They now have ${newBalance} coins, and you have ${remainingCoins} coins!`
-    )
+    );
   },
-}
+};
+

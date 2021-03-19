@@ -8,7 +8,7 @@ const antiAd = require("./anti-ad");
 const censorship = require("./censorship");
 const inviteNotifications = require("./invite-notifications");
 const scalingChannels = require("./scaling-channels");
-const levels = require("./levels")
+const levels = require("./levels");
 
 const config = require("../config.json");
 
@@ -17,7 +17,7 @@ client.on("ready", async () => {
   loadCommands(client);
 
   // Initialize other functions
-  antiAd(client)
+  antiAd(client);
   //roleClaim(client);
   welcome(client);
   censorship(client);

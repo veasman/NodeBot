@@ -1,10 +1,9 @@
 const Discord = require("discord.js");
 
-const mongo = require('../../mongo')
-const profileSchema = require('../../schemas/profile-schema')
+const mongo = require("../../mongo");
+const profileSchema = require("../../schemas/profile-schema");
 
-const getLevel = async (guildId, userId, message) => {
-}
+const getLevel = async (guildId, userId, message) => {};
 
 module.exports = {
   commands: "rank",
@@ -19,7 +18,7 @@ module.exports = {
 
     let level = 0;
     let xp = 0;
-    
+
     //const userLevel = getLevel(guild.id, member.id, message);
     //message.channel.send(`${userLevel}`);
 
@@ -50,15 +49,16 @@ module.exports = {
         {
           name: `Level`,
           value: `${level}`,
-          inline: true
+          inline: true,
         },
         {
           name: "XP",
           value: `${xp}`,
-          inline: true
+          inline: true,
         }
-      )
+      );
 
     message.channel.send(embed);
   },
 };
+

@@ -1,15 +1,16 @@
-const mongoose = require("mongoose")
-const welcome = require("../welcome")
+const mongoose = require("mongoose");
+const welcome = require("../welcome");
 
 const reqString = {
   type: String,
-  required: true
-}
+  required: true,
+};
 
 const welcomeSchema = mongoose.Schema({
   _id: reqString,
   channelId: reqString,
-  text: reqString
-})
+  text: reqString,
+});
 
 module.exports = mongoose.model("welcome-channels", welcomeSchema);
+

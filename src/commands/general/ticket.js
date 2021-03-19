@@ -1,10 +1,10 @@
-const sendMessage = require("../../send-message")
+const sendMessage = require("../../send-message");
 
 const channelId = "822108577983889408";
 const check = "✅";
 let registered = false;
 
-const registerEvent = client => {
+const registerEvent = (client) => {
   if (registered) {
     return;
   }
@@ -24,7 +24,7 @@ const registerEvent = client => {
       message.delete();
     }
   });
-}
+};
 
 module.exports = {
   commands: ["ticket", "support"],
@@ -36,19 +36,25 @@ module.exports = {
     registerEvent(client);
 
     const channel = guild.channels.cache.get(channelId);
-    channel.send(`A new ticket has been created by <@${member.id}>
-    
-    "${text}"
-    
-    Click the ${check} when this issue has been resolved`
-    )
-    .then((ticketMessage) => {
-      ticketMessage.react(check);
+    channel
+      .send(
+        `A new ticket has been created by <@${member.id}>
 
-      sendMessage(userMessage.channel,
-        `${userMessage.author} Your ticket has been sent!`, 10);
-      //userMessage.reply("Your ticket has been sent");
-      userMessage.delete();
-    });
+    "${text}"
+
+    Click the ${check} when this issue has been resolved`
+      )
+      .then((ticketMessage) => {
+        ticketMessage.react(check);
+
+        sendMessage(
+          userMessage.channel,
+          `${userMessage.author} Your ticket has been sent!`,
+          10
+        );
+        //userMessage.reply("Your ticket has been sent");
+        userMessage.delete();
+      });
   },
-}
+};
+

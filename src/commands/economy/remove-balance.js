@@ -1,4 +1,4 @@
-const economy = require("../../economy")
+const economy = require("../../economy");
 
 module.exports = {
   commands: ["removebalance", "removebal"],
@@ -25,8 +25,11 @@ module.exports = {
 
     const newCoins = await economy.addCoins(guildId, userId, -coins);
 
-  message.reply(`You have removed ${coins} coin(s) from <@${userId}>. They now have ${newCoins} coin(s)`)
+    message.reply(
+      `You have removed ${coins} coin(s) from <@${userId}>. They now have ${newCoins} coin(s)`
+    );
   },
-  permissions: ["ADMINISTRATOR"]
+  permissions: ["ADMINISTRATOR"],
   //requiredRoles: ["𝖒𝖊𝖗𝖈𝖍𝖆𝖓𝖙"]
-}
+};
+

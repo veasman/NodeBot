@@ -6,9 +6,9 @@ module.exports = {
   maxArgs: 0,
   description: "Clear messages from a channel",
   callback: (message, arguments, text) => {
-      message.channel.messages.fetch().then((results) => {
-        message.channel.bulkDelete(results);
-      });
+    message.channel.messages.fetch().then((results) => {
+      message.channel.bulkDelete(results);
+    });
   },
   permissions: ["ADMINISTRATOR"],
   requiredRoles: [],

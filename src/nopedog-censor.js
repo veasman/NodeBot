@@ -6,10 +6,17 @@ module.exports = (client) => {
       return;
     }
 
-    if (message.author.id === "402269568443219978" &&
-        message.channel.id === "821500891403255808") {
+    if (
+      message.author.id === "402269568443219978" &&
+      message.channel.id === "821500891403255808"
+    ) {
       message.delete();
-      sendMessage(message.channel, `${message.author} You must be 18 to post here!`, 10);
+      sendMessage(
+        message.channel,
+        `${message.author} You must be 18 to post here!`,
+        10
+      );
     }
   });
-}
+};
+

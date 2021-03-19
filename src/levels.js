@@ -1,15 +1,15 @@
-const mongo = require('./mongo')
-const profileSchema = require('./schemas/profile-schema')
+const mongo = require("./mongo");
+const profileSchema = require("./schemas/profile-schema");
 
 module.exports = (client) => {
-  client.on('message', (message) => {
-    const { guild, member } = message
+  client.on("message", (message) => {
+    const { guild, member } = message;
 
-    addXP(guild.id, member.id, 20, message)
-  })
-}
+    addXP(guild.id, member.id, 20, message);
+  });
+};
 
-const getNeededXP = (level) => level * level * 100
+const getNeededXP = (level) => level * level * 100;
 
 const addXP = async (guildId, userId, xpToAdd, message) => {
   await mongo().then(async (mongoose) => {
@@ -30,16 +30,18 @@ const addXP = async (guildId, userId, xpToAdd, message) => {
           upsert: true,
           new: true,
         }
-      )
+      );
 
-      let { xp, level } = result
-      const needed = getNeededXP(level)
+      let { xp, level } = result;
+      const needed = getNeededXP(level);
 
       if (xp >= needed) {
-        ++level
-        xp -= needed
+        ++level;
+        xp -= needed;
 
-        message.channel.send(`<@${userId}> you have leveled up to level ${level}`)
+        message.channel.send(
+          `<@${userId}> you have leveled up to level ${level}`
+        );
 
         await profileSchema.updateOne(
           {
@@ -50,12 +52,13 @@ const addXP = async (guildId, userId, xpToAdd, message) => {
             level,
             xp,
           }
-        )
+        );
       }
     } finally {
-      mongoose.connection.close()
+      mongoose.connection.close();
     }
-  })
-}
+  });
+};
 
-module.exports.addXP = addXP
+module.exports.addXP = addXP;
+
