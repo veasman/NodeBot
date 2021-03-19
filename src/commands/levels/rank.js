@@ -42,6 +42,7 @@ module.exports = {
         mongoose.connection.close();
       }
     });
+    let requiredXP = level * level * 100;
     const embed = new Discord.MessageEmbed()
       .setTitle(`${member.displayName}'s rank`)
       .setColor(0xfa5ffa)
@@ -53,7 +54,7 @@ module.exports = {
         },
         {
           name: "XP",
-          value: `${xp}`,
+          value: `${xp}/${requiredXP}`,
           inline: true,
         }
       );

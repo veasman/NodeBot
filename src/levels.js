@@ -5,7 +5,10 @@ module.exports = (client) => {
   client.on("message", (message) => {
     const { guild, member } = message;
 
-    addXP(guild.id, member.id, 20, message);
+    const min = 20;
+    const max = 40;
+    let randomNum = Math.round(Math.random() * (max - min + 1)) + min;
+    addXP(guild.id, member.id, randomNum, message);
   });
 };
 
