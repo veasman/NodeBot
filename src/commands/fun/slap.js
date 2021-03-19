@@ -17,7 +17,8 @@ module.exports = {
     }
 
     if (!member.kickable) {
-      const slapMessage = Math.random() === 1 ?
+      const randomNum = Math.round(Math.random());
+      const slapMessage = randomNum === 1 ?
         `${tag}, you have been slapped!` :
         `You tried to slap ${tag}, but they were too powerful... ${tag} slaps you back!`
       message.channel.send(slapMessage);
@@ -26,6 +27,5 @@ module.exports = {
 
     message.channel.send(`${tag}, you have been slapped!`)
   },
-  //permissions: ["ADMINISTRATOR"],
-  requiredRoles: ["𝕺𝖜𝖓𝖊𝖗", "𝖆𝖉𝖒𝖎𝖓", "𝖒𝖔𝖉𝖊𝖗𝖆𝖙𝖔𝖗"],
+  permissions: ["ADMINISTRATOR"],
 };

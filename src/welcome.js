@@ -42,6 +42,7 @@ module.exports = (client) => {
         mongoose.connection.close();
       }
     })
+    message.reply("Welcome message has been set. All future welcome messages will be send in this channel.");
   })
 
   const onJoin = async (member) => {
@@ -68,9 +69,9 @@ module.exports = (client) => {
     const channel = guild.channels.cache.get(channelId);
     channel.send(text.replace(/<@>/g, `<@${member.id}>`));
   }
-  command(client, "simjoin", (message) => {
+  /*command(client, "simjoin", (message) => {
     onJoin(message.member);
-  })
+  })*/
 
   client.on("guildMemberAdd", (member) => {
     onJoin(member);

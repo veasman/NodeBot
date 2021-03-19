@@ -36,7 +36,7 @@ module.exports = client => {
         const channelId = "822102032021979177";
         const channel = guild.channels.cache.get(channelId);
         const count = invitesAfter[inviter];
-        channel.send(`Please welcome<@${id}> to the Discord! Invited by ${inviter} (${count} invites)`)
+        channel.send(`<@${id}> has joined. Invited by ${inviter} (${count} invites)`)
         return;
       }
     }
