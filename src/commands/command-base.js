@@ -52,6 +52,7 @@ module.exports = (client, commandOptions) => {
     permissionError = 'You do not have permission to run this command.',
     minArgs = 0,
     maxArgs = null,
+    requiredChannel = "",
     permissions = [],
     requiredRoles = [],
     callback,
@@ -75,7 +76,7 @@ module.exports = (client, commandOptions) => {
 
   // Listen for messages
   client.on('message', async (message) => {
-    const { member, content, guild } = message
+    const { member, content, guild, channel } = message
 
     const prefix = guildPrefixes[guild.id] || globalPrefix
 
@@ -87,6 +88,16 @@ module.exports = (client, commandOptions) => {
         content.toLowerCase() === command
       ) {
         // A command has been ran
+        
+        // Ensure we are in the right channel
+        if (requiredChannel !== channel.name) {
+          const foundChannel = guild.channels.cache.find((channel) => {
+            return channel.name === requiredChannel;
+          });
+
+          message.reply(`That commant is not allowed in this channel. Please use <#${foundChannel.id}>`)
+          return;
+        }
 
         // Ensure the user has the required permissions
         for (const permission of permissions) {
@@ -136,7 +147,7 @@ module.exports = (client, commandOptions) => {
   })
 }
 
-module.exports.updateCache = (guildId, newPrefix) => {
+/*module.exports.updateCache = (guildId, newPrefix) => {
   guildPrefixes[guildId] = newPrefix
 }
 
@@ -153,4 +164,4 @@ module.exports.loadPrefixes = async (client) => {
       mongoose.connection.close()
     }
   })
-}
+}*/

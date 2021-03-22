@@ -5,14 +5,18 @@ module.exports = (client) => {
   client.on("message", (message) => {
     const { guild, member } = message;
 
-    const min = 20;
-    const max = 40;
+    if (member.user.bot) {
+      return;
+    }
+
+    const min = 10;
+    const max = 30;
     let randomNum = Math.round(Math.random() * (max - min + 1)) + min;
     addXP(guild.id, member.id, randomNum, message);
   });
 };
 
-const getNeededXP = (level) => level * level * 100;
+const getNeededXP = (level) => level * 150;
 
 const addXP = async (guildId, userId, xpToAdd, message) => {
   await mongo().then(async (mongoose) => {
@@ -64,4 +68,3 @@ const addXP = async (guildId, userId, xpToAdd, message) => {
 };
 
 module.exports.addXP = addXP;
-

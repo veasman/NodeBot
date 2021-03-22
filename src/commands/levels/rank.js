@@ -11,6 +11,7 @@ module.exports = {
   minArgs: 0,
   maxArgs: 0,
   description: "Check your level",
+  requiredChannel: "𝖗𝖆𝖓𝖐-𝖉𝖎𝖘𝖕𝖑𝖆𝖞",
   callback: async (message, arguments, text) => {
     const { guild, member } = message;
     const guildId = guild.id;
@@ -36,13 +37,11 @@ module.exports = {
         );
         level = result.level;
         xp = result.xp;
-        console.log(`LEVEL: ${level}`);
-        console.log(`XP: ${xp}`);
       } finally {
         mongoose.connection.close();
       }
     });
-    let requiredXP = level * level * 100;
+    let requiredXP = level * 150;
     const embed = new Discord.MessageEmbed()
       .setTitle(`${member.displayName}'s rank`)
       .setColor(0xfa5ffa)

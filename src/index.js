@@ -10,6 +10,7 @@ const censorship = require("./censorship");
 const inviteNotifications = require("./invite-notifications");
 const scalingChannels = require("./scaling-channels");
 const levels = require("./levels");
+const modLogs = require("./mod-logs")
 
 const config = require("../config.json");
 
@@ -18,7 +19,7 @@ client.on("ready", async () => {
   loadCommands(client);
 
   // Load per-server prefixes
-  commandBase.loadPrefixes(client);
+  //commandBase.loadPrefixes(client);
 
   // Initialize other functions
   antiAd(client);
@@ -28,6 +29,7 @@ client.on("ready", async () => {
   inviteNotifications(client);
   //scalingChannels(client);
   levels(client);
+  modLogs(client);
 });
 
 client.login(config.token);
